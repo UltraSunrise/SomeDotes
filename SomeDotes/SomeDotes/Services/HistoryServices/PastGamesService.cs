@@ -1,22 +1,23 @@
-﻿namespace SomeDotes.Services
+﻿namespace SomeDotes.Services.HistoryServices
 {
     using Newtonsoft.Json;
     using SomeDotes.Data.Entities;
     using SomeDotes.Models.Intefaces;
+    using SomeDotes.Models.Interfaces;
     using SomeDotes.Services.DatabaseServices;
-    using System;
     using System.Collections.Generic;
     using System.IO;
     using System.Net;
     using System.Threading;
+    using System.Threading.Tasks;
 
-    public class Reader
+    public class PastGamesService : IPastGamesService
     {
         IDatabaseService dbService = new DatabaseService();
         private AutoResetEvent waitForConnection = new AutoResetEvent(false);
         HttpListener net_Listener;
 
-        public async System.Threading.Tasks.Task ReadXMLAsync()
+        public async Task ReadXMLAsync()
         {
             int count = 0;
             long tempId = dbService.GetLastAddedMatch();

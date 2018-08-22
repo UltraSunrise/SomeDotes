@@ -3,13 +3,17 @@
     using System.Diagnostics;
     using Microsoft.AspNetCore.Mvc;
     using SomeDotes.Models;
-    using SomeDotes.Services;
+    using SomeDotes.Models.Interfaces;
+    using SomeDotes.Services.HistoryServices;
+    using SomeDotes.Services.LifetimeServices;
 
     public class HomeController : Controller
     {
         public IActionResult Index()
         {
-            Reader read = new Reader();
+            IRegisterCurrentGameService cgs = new RegisterCurrentGameService();
+            cgs.Run();
+            IPastGamesService read = new PastGamesService();
             read.ReadXMLAsync();
 
             return View();
