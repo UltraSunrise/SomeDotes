@@ -1,6 +1,7 @@
 ﻿namespace SomeDotes.Services.DatabaseServices
 {
     using System.Collections.Generic;
+    using System.Linq;
     using SomeDotes.Data;
     using SomeDotes.Data.Entities;
     using SomeDotes.Models.Intefaces;
@@ -11,7 +12,9 @@
         {
             using (SomeDotesDbContext db = new SomeDotesDbContext())
             {
-                db.Results.Add(result);
+                db
+                    .Results
+                    .Add(result);
 
                 db.SaveChanges();
             }
@@ -21,9 +24,22 @@
         {
             using (SomeDotesDbContext db = new SomeDotesDbContext())
             {
-                db.Results.AddRange(results);
+                db
+                    .Results
+                    .AddRange(results);
 
                 db.SaveChanges();
+            }
+        }
+
+        public long GetLastAddedMatch()
+        {
+            using (SomeDotesDbContext db = new SomeDotesDbContext())
+            {
+                return db
+                         .Results
+                         .LastOrDefault()
+                         .MatchId;
             }
         }
     }
