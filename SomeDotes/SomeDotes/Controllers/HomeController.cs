@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using SomeDotes.Models;
-
-namespace SomeDotes.Controllers
+﻿namespace SomeDotes.Controllers
 {
+    using System.Diagnostics;
+    using Microsoft.AspNetCore.Mvc;
+    using SomeDotes.Models;
+    using SomeDotes.Services;
+
     public class HomeController : Controller
     {
         public IActionResult Index()
         {
+            Reader read = new Reader();
+            read.ReadXMLAsync();
+
             return View();
         }
 

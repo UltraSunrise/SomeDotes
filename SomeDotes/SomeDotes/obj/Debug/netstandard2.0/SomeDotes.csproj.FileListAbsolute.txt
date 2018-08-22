@@ -1,0 +1,6 @@
+C:\Users\User\Documents\GitHub\SomeDotes\SomeDotes\SomeDotes\obj\Debug\netstandard2.0\SomeDotes.csprojAssemblyReference.cache
+C:\Users\User\Documents\GitHub\SomeDotes\SomeDotes\SomeDotes\obj\Debug\netstandard2.0\SomeDotes.Properties.Resources.resources
+C:\Users\User\Documents\GitHub\SomeDotes\SomeDotes\SomeDotes\obj\Debug\netstandard2.0\SomeDotes.csproj.GenerateResource.cache
+C:\Users\User\Documents\GitHub\SomeDotes\SomeDotes\SomeDotes\obj\Debug\netstandard2.0\SomeDotes.csproj.CoreCompileInputs.cache
+C:\Users\User\Documents\GitHub\SomeDotes\SomeDotes\SomeDotes\obj\Debug\netstandard2.0\SomeDotes.AssemblyInfoInputs.cache
+C:\Users\User\Documents\GitHub\SomeDotes\SomeDotes\SomeDotes\obj\Debug\netstandard2.0\SomeDotes.AssemblyInfo.cs
