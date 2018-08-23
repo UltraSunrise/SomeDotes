@@ -1,4 +1,4 @@
-﻿namespace SomeDotes.Services.LifetimeServices
+﻿namespace SomeDotes.Services.RealTimeService
 {
     using Microsoft.Win32;
     using SomeDotes.Models.Interfaces;

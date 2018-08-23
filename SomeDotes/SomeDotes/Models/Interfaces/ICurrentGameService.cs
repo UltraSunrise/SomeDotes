@@ -1,4 +1,4 @@
-﻿using SomeDotes.Services.LifetimeServices;
+﻿using SomeDotes.Services.RealTimeService;
 
 namespace SomeDotes.Models.Interfaces
 {

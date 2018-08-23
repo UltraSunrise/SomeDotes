@@ -35,10 +35,10 @@
                 Result result = JsonConvert.DeserializeObject<RootObject>(responseData).Result;
                 tempId--;
 
-                if (result.StartTime < 1503359935)
+                if (result.StartTime < 1503359935 && result.StartTime > 1500000000)
                     break;
 
-                if (result.Duration < 360 && result.LobbyType != 7)
+                if (result.Duration < 360 || result.LobbyType != 7)
                     continue;
 
                 results.Add(result);

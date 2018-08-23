@@ -1,4 +1,4 @@
-﻿namespace SomeDotes.Services.LifetimeServices
+﻿namespace SomeDotes.Services.RealTimeService
 {
     using Newtonsoft.Json.Linq;
     using SomeDotes.Models.Interfaces;
