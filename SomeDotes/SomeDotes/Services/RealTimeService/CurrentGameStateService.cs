@@ -1,11 +1,12 @@
 ﻿namespace SomeDotes.Services.RealTimeService
 {
-    using Newtonsoft.Json.Linq;
+    using Newtonsoft.Json;
     using SomeDotes.Models.Interfaces;
+    using SomeDotes.Models.JSONModels;
 
     public class CurrentGameStateService : ICurrentGameStateService
     {
-        private JObject parseData;
+        private RootObject parsedData;
         private string json;
 
         public CurrentGameStateService(string jsonData)
@@ -16,9 +17,15 @@
             }
 
             json = jsonData;
-            parseData = JObject.Parse(json);
+            parsedData = JsonConvert.DeserializeObject<RootObject>(jsonData);
         }
 
-
+        public RootObject ParsedData
+        {
+            get
+            {
+                return parsedData;
+            }
+        }
     }
 }

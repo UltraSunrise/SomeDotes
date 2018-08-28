@@ -3,11 +3,17 @@
     using System.Diagnostics;
     using Microsoft.AspNetCore.Mvc;
     using SomeDotes.Models;
+    using SomeDotes.Models.Interfaces;
+    using SomeDotes.Services.RealTimeService;
 
     public class HomeController : Controller
     {
         public IActionResult Index()
         {
+            IRegisterCurrentGameService rcgs = new RegisterCurrentGameService();
+
+            rcgs.Run();
+
             return View();
         }
 

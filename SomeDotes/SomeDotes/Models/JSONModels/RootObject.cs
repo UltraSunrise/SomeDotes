@@ -10,5 +10,11 @@
         public Map Map { get; set; }
         [JsonProperty("player")]
         public MainPlayer MainPlayer { get; set; }
+        [JsonProperty("hero")]
+        public Hero Hero { get; set; }
+        [JsonProperty("abilities")]
+        public Abilities Abilities { get; set; }
+        [JsonProperty("items")]
+        public Items Items { get; set; }
     }
 }

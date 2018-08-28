@@ -14,6 +14,5 @@
         public long Victim8 { get; set; }
         [JsonProperty("victimid_9")]
         public long Victim9 { get; set; }
-
     }
 }
