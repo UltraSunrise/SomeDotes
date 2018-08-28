@@ -2,7 +2,7 @@
 {
     using Newtonsoft.Json;
     using SomeDotes.Models.Interfaces;
-    using SomeDotes.Models.JSONModels;
+    using SomeDotes.Models.JSONModels.RealtimeGameModels;
 
     public class CurrentGameStateService : ICurrentGameStateService
     {

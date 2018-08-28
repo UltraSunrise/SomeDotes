@@ -1,4 +1,4 @@
-﻿namespace SomeDotes.Models.JSONModels
+﻿namespace SomeDotes.Models.JSONModels.RealtimeGameModels
 {
     using Newtonsoft.Json;
 

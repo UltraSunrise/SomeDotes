@@ -1,7 +1,7 @@
-﻿using Newtonsoft.Json;
-
-namespace SomeDotes.Models.JSONModels
+﻿namespace SomeDotes.Models.JSONModels.RealtimeGameModels
 {
+    using Newtonsoft.Json;
+
     public class MainPlayer
     {
         [JsonProperty("team2")]
