@@ -7,7 +7,6 @@
     using SomeDotes.Models.JSONModels.RealtimeGameModels;
     using SomeDotes.Models.MainModels;
     using SomeDotes.Services.Helpers;
-    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
@@ -18,6 +17,7 @@
         private ICurrentGameService cgs;
         private IConvertSteamIdToAccountId converter;
         private bool isNewGame;
+        private readonly string PRIVATE_ACCOUNT = "4294967295";
 
         public RegisterCurrentGameService()
         {
@@ -92,7 +92,7 @@
             allSteamIds.Add(parsedData.MainPlayer.DireTeam.Player8.SteamId);
             allSteamIds.Add(parsedData.MainPlayer.DireTeam.Player9.SteamId);
 
-            return allSteamIds;
+            return allSteamIds.Where(asi => asi != PRIVATE_ACCOUNT).ToList();
         }
 
         private void RegisterCGSFile()

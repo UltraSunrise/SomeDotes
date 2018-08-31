@@ -10,6 +10,8 @@
 
     public class ConvertSteamIdToAccountId : IConvertSteamIdToAccountId
     {
+        private readonly string PRIVATE_PLAYER = "4294967295";
+
         public string SingleId(string steamId)
         {
             string json = string.Empty;
@@ -42,6 +44,9 @@
                 foreach (var player in match.Players)
                 {
                     string currentPlayerAccountId = player.AccountId.ToString();
+
+                    if (currentPlayerAccountId == PRIVATE_PLAYER)
+                        continue;
 
                     if (!steamIds.ContainsKey(currentPlayerAccountId))
                         steamIds.Add(currentPlayerAccountId, 0);
