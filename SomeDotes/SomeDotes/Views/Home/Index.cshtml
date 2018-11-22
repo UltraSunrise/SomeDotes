@@ -1,3 +1,32 @@
-﻿@{
+﻿@model SomeDotes.Models.MainModels.MatchInfo
+@{
     ViewData["Title"] = "Home Page";
 }
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6/jquery.min.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
+</head>
+<body class="statisticsBody">
+<div id="stats">
+    @Html.Partial("_RefreshHome")
+</div>
+
+<script>
+    function loadPartialView() {
+        $.ajax({
+            url: '@Url.Action("_RefreshHome", "Home")',
+            type: 'POST',
+            success: function (result) {
+                $("#stats").html(result);
+            }
+        });
+    }
+
+    $(function() {
+        loadPartialView();
+        
+        window.setInterval("loadPartialView()", 1000);
+    });
+</script>
+</body>

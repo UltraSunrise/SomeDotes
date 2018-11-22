@@ -1,0 +1,174 @@
+﻿@model SomeDotes.Models.MainModels.MatchInfo
+@{
+    string radiantWinChance = string.Empty;
+    string direWinChance = string.Empty;
+}
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body class="statisticsBody" style="color: beige">
+    <div class="matchInfo" style="text-align: center">
+        <p>Match ID:</p>
+        <p>
+            @if (Model != null)
+            {
+                @Html.Label(Model.MatchID.ToString())
+            }
+        </p>
+        <p>Match time:</p>
+        <p>
+            @if (Model != null)
+            {
+                @Html.Label(Model.MatchTime)
+            }
+        </p>
+    </div>
+
+    <div style="width: 100%; clear: both">
+        @if (Model != null)
+        {
+            <p style="float: left">
+                <label style="font: bold; color: green; font-size: 24px; float: left">Radiant Kills: </label>
+                <label style="font: bold; font-size: 24px; margin-left: 8px; margin-right: 10px; float: left">@Model.RadiantKills</label>
+            </p>
+            <p style="float: right">
+                <label style="font: bold; color: red; font-size: 24px">Dire Kills: </label>
+                <label style="font: bold; font-size: 24px; margin-left: 8px;">@Model.DireKills</label>
+            </p>
+        }
+    </div>
+    <div class="container" style="width: 85%">
+        <div class="progress" style="width: 99%">
+            @if (Model != null)
+            {
+                if (Model.WinProbability < 20)
+                {
+                    radiantWinChance = Model.WinProbability + "%";
+                    direWinChance = "Dire's win chance: " + (100 - Model.WinProbability) + "%";
+                }
+                else if (Model.WinProbability > 80)
+                {
+                    radiantWinChance = "Radiant's win chance: " + Model.WinProbability + "%";
+                    direWinChance = (100 - Model.WinProbability) + "%";
+                }
+                else
+                {
+                    radiantWinChance = "Radiant's win chance: " + Model.WinProbability + "%";
+                    direWinChance = "Dire's win chance: " + (100 - Model.WinProbability) + "%";
+                }
+                <div class="progress-bar progress-bar-success" role="progressbar" style="width: @(Model.WinProbability + "%")">
+                    @radiantWinChance
+                </div>
+                <div class="progress-bar progress-bar-danger" role="progressbar" style="width:@((100 - Model.WinProbability) + "%")">
+                    @direWinChance
+                </div>
+            }
+        </div>
+    </div>
+
+    @if (Model != null)
+    {
+    <table class="myTable" style="width:100%">
+        <tr>
+            <td colspan="4"></td>
+            @for (int i = 0; i < 5; i++)
+            {
+                <td><img src="@Model.HeroesImages[i]" alt="Avatar" style="border-radius: 80%; width: 80%"></td>
+            }
+            <td colspan="4"></td>
+            @for (int i = 5; i < 10; i++)
+            {
+                <td style="text-align: center"><img src="@Model.HeroesImages[i]" alt="Avatar" style="border-radius: 80%; width: 80%"></td>
+            }
+        </tr>
+        <tr class="KDAs">
+            <td colspan="4" style="text-align: center">K/D/A</td>
+            @for (int i = 0; i < 5; i++)
+            {
+                <td>
+                    @string.Format("{0}/{1}/{2}", Model.RadiantTeam[i].Kills, Model.RadiantTeam[i].Death, Model.RadiantTeam[i].Assists)
+                </td>
+            }
+            <td colspan="4"></td>
+            @for (int i = 0; i < 5; i++)
+            {
+                <td style="text-align: center">
+                    @string.Format("{0}/{1}/{2}", Model.DireTeam[i].Kills, Model.DireTeam[i].Death, Model.DireTeam[i].Assists)
+                </td>
+            }
+        </tr>
+        <tr>
+            <td colspan="4" style="text-align: center">Networth</td>
+            @for (int i = 0; i < 10; i++)
+            {
+                if (i == 5)
+                {
+                    <td colspan="4"></td>
+                }
+                <td>
+                    @Model.HeroesNetWorth[i]
+                </td>
+            }
+        </tr>
+        <tr>
+            <td colspan="4" style="text-align: center">Current gold</td>
+            @for (int i = 0; i < 10; i++)
+            {
+                if (i == 5)
+                {
+                    <td colspan="4"></td>
+                }
+                <td>
+                    @Model.HeroesCurrentGold[i]
+                </td>
+            }
+        </tr>
+        <tr>
+            <td colspan="4" style="text-align: center">Reliable gold</td>
+            @for (int i = 0; i < 10; i++)
+            {
+                if (i == 5)
+                {
+                    <td colspan="4"></td>
+                }
+                <td>
+                    @Model.HeroesReliableGold[i]
+                </td>
+            }
+        </tr>
+        <tr>
+            <td colspan="4" style="text-align: center">Buyback cost</td>
+            @for (int i = 0; i < 10; i++)
+            {
+                if (i == 5)
+                {
+                    <td colspan="4"></td>
+                }
+                <td>
+                    @Model.HeroesBuybackCost[i]
+                </td>
+            }
+        </tr>
+        <tr>
+            <td colspan="4" style="text-align: center">Buyback cooldown</td>
+            @for (int i = 0; i < 10; i++)
+            {
+                if (i == 5)
+                {
+                    <td colspan="4"></td>
+                }
+                <td>
+                    @Model.HeroesBuybackCooldown[i]
+                </td>
+            }
+        </tr>
+    </table>
+
+    }
+
+</body>
+

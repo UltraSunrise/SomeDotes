@@ -42,5 +42,15 @@
                          .MatchId;
             }
         }
+
+        public List<HeroDb> GetAllHeroes()
+        {
+            using (SomeDotesDbContext db = new SomeDotesDbContext())
+            {
+                return db
+                        .Heroes
+                        .ToList();
+            }
+        }
     }
 }

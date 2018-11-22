@@ -1,13 +1,15 @@
-﻿namespace SomeDotes.Data
+﻿using SomeDotes.Data.Entities;
+
+namespace SomeDotes.Data
 {
     using Microsoft.EntityFrameworkCore;
-    using SomeDotes.Data.Entities;
 
     public class SomeDotesDbContext : DbContext
     {
         public DbSet<Result> Results { get; set; }
         public DbSet<Player> Players { get; set; }
         public DbSet<Ability> Abilities { get; set; }
+        public DbSet<HeroDb> Heroes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -16,7 +18,7 @@
                 .HasMany(r => r.Players)
                 .WithOne(p => p.Result)
                 .HasForeignKey(p => p.ResultId);
-            
+
             builder
                 .Entity<Player>()
                 .HasMany(p => p.Abilities)

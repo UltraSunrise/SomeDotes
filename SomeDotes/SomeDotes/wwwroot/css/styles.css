@@ -1,4 +1,50 @@
 ﻿body {
-    background-image: url(../images/dota.jpg);
+    background-image: url(../images/background.jpg);
     background-size: cover;
+}
+
+.matchInfo {
+    color: cornsilk;
+}
+
+.columnRadiantImages {
+    float: left;
+    width: 10%;
+}
+
+.columnDireImages {
+    float: left;
+    width: 10%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.rowImages {
+    width: 102%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.rowData {
+    width: 130%;
+}
+
+.columnData {
+    float: left;
+    width: 10%;
+}
+
+table.myTable td {
+    text-align: center;
+}
+
+tr.KDAs td {
+    font: bold;
+    color: cornsilk;
+    font-size: 16px;
 }
