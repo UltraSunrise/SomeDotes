@@ -114,10 +114,10 @@ namespace SomeDotes.Services.RealTimeService
             matchInfo.HeroesReliableGold.AddRange(gs.ParsedData.MainPlayer.RadiantTeam.GetAllPlayers.Select(gap => gap.GoldReliable));
             matchInfo.HeroesReliableGold.AddRange(gs.ParsedData.MainPlayer.DireTeam.GetAllPlayers.Select(gap => gap.GoldReliable));
             //All players buybackcost
-            matchInfo.HeroesBuybackCost.AddRange(gs.ParsedData.Hero.RadintTeam.AllPlayers.Select(p => p.BuybackCost));
+            matchInfo.HeroesBuybackCost.AddRange(gs.ParsedData.Hero.RadiantTeam.AllPlayers.Select(p => p.BuybackCost));
             matchInfo.HeroesBuybackCost.AddRange(gs.ParsedData.Hero.DireTeam.AllPlayers.Select(p => p.BuybackCost));
             //All players buyback cooldown
-            matchInfo.HeroesBuybackCooldown.AddRange(gs.ParsedData.Hero.RadintTeam.AllPlayers.Select(p => p.BuybackCooldown));
+            matchInfo.HeroesBuybackCooldown.AddRange(gs.ParsedData.Hero.RadiantTeam.AllPlayers.Select(p => p.BuybackCooldown));
             matchInfo.HeroesBuybackCooldown.AddRange(gs.ParsedData.Hero.DireTeam.AllPlayers.Select(p => p.BuybackCooldown));
             
             LoadImages(matchInfo, gs);
@@ -188,27 +188,21 @@ namespace SomeDotes.Services.RealTimeService
 
         private void LoadImages(MatchInfo matchInfo, CurrentGameStateService gs)
         {
-            matchInfo.Hero0ImgDataUrl = ConvertByteArrayToString(GetHero(gs.ParsedData.Hero.RadintTeam.Player0.Id));
-            matchInfo.HeroesImages.Add(matchInfo.Hero0ImgDataUrl);
-            matchInfo.Hero1ImgDataUrl = ConvertByteArrayToString(GetHero(gs.ParsedData.Hero.RadintTeam.Player1.Id));
-            matchInfo.HeroesImages.Add(matchInfo.Hero1ImgDataUrl);
-            matchInfo.Hero2ImgDataUrl = ConvertByteArrayToString(GetHero(gs.ParsedData.Hero.RadintTeam.Player2.Id));
-            matchInfo.HeroesImages.Add(matchInfo.Hero2ImgDataUrl);
-            matchInfo.Hero3ImgDataUrl = ConvertByteArrayToString(GetHero(gs.ParsedData.Hero.RadintTeam.Player3.Id));
-            matchInfo.HeroesImages.Add(matchInfo.Hero3ImgDataUrl);
-            matchInfo.Hero4ImgDataUrl = ConvertByteArrayToString(GetHero(gs.ParsedData.Hero.RadintTeam.Player4.Id));
-            matchInfo.HeroesImages.Add(matchInfo.Hero4ImgDataUrl);
+            ImagesHelper imagesHelper = ImagesHelper.GetInstance();
 
-            matchInfo.Hero5ImgDataUrl = ConvertByteArrayToString(GetHero(gs.ParsedData.Hero.DireTeam.Player5.Id));
-            matchInfo.HeroesImages.Add(matchInfo.Hero5ImgDataUrl);
-            matchInfo.Hero6ImgDataUrl = ConvertByteArrayToString(GetHero(gs.ParsedData.Hero.DireTeam.Player6.Id));
-            matchInfo.HeroesImages.Add(matchInfo.Hero6ImgDataUrl);
-            matchInfo.Hero7ImgDataUrl = ConvertByteArrayToString(GetHero(gs.ParsedData.Hero.DireTeam.Player7.Id));
-            matchInfo.HeroesImages.Add(matchInfo.Hero7ImgDataUrl);
-            matchInfo.Hero8ImgDataUrl = ConvertByteArrayToString(GetHero(gs.ParsedData.Hero.DireTeam.Player8.Id));
-            matchInfo.HeroesImages.Add(matchInfo.Hero8ImgDataUrl);
-            matchInfo.Hero9ImgDataUrl = ConvertByteArrayToString(GetHero(gs.ParsedData.Hero.DireTeam.Player9.Id));
-            matchInfo.HeroesImages.Add(matchInfo.Hero9ImgDataUrl);
+            if (!imagesHelper.AreAllAdded)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    if (imagesHelper.AllImages[i] == null)
+                    {
+                        imagesHelper.AllImages[i] = ConvertByteArrayToString(GetHero(gs.ParsedData.Hero.AllHeroes[i].Id));
+                    }
+                    if (imagesHelper.AllImages.Where(ai => ai != null).Count() == 10)
+                        imagesHelper.AreAllAdded = true;
+                }
+            }
+            matchInfo.HeroesImages = imagesHelper.AllImages;
         }
 
         private string ConvertByteArrayToString(HeroDb hero)

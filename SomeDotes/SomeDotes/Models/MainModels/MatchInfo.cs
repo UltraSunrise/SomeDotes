@@ -1,9 +1,8 @@
-﻿using SomeDotes.Models.JSONModels.RealtimeGameModels;
-using System;
-using System.Collections.Generic;
-
-namespace SomeDotes.Models.MainModels
+﻿namespace SomeDotes.Models.MainModels
 {
+    using SomeDotes.Models.JSONModels.RealtimeGameModels;
+    using System.Collections.Generic;
+
     public class MatchInfo
     {
         public long MatchID { get; set; }
@@ -13,19 +12,9 @@ namespace SomeDotes.Models.MainModels
         public long RadiantKills { get; set; }
         public long DireKills { get; set; }
         public string MatchTime { get; set; }
-        public string Hero0ImgDataUrl { get; set; }
-        public string Hero1ImgDataUrl { get; set; }
-        public string Hero2ImgDataUrl { get; set; }
-        public string Hero3ImgDataUrl { get; set; }
-        public string Hero4ImgDataUrl { get; set; }
-        public string Hero5ImgDataUrl { get; set; }
-        public string Hero6ImgDataUrl { get; set; }
-        public string Hero7ImgDataUrl { get; set; }
-        public string Hero8ImgDataUrl { get; set; }
-        public string Hero9ImgDataUrl { get; set; }
         public List<RadiantSubPlayer> RadiantTeam { get; set; } = new List<RadiantSubPlayer>();
         public List<DireSubPlayer> DireTeam { get; set; } = new List<DireSubPlayer>();
-        public List<string> HeroesImages { get; set; } = new List<string>();
+        public string[] HeroesImages { get; set; } = new string[10];
         public List<long> HeroesNetWorth { get; set; } = new List<long>();
         public List<long> HeroesCurrentGold { get; set; } = new List<long>();
         public List<long> HeroesReliableGold { get; set; } = new List<long>();
