@@ -5,9 +5,7 @@ using SomeDotes.Services.DatabaseServices;
 
 namespace SomeDotes.Services.RealTimeService
 {
-    using Microsoft.EntityFrameworkCore;
     using Microsoft.Win32;
-    using SomeDotes.Data;
     using SomeDotes.Models.Interfaces;
     using SomeDotes.Models.JSONModels.RealtimeGameModels;
     using SomeDotes.Models.MainModels;
@@ -87,6 +85,11 @@ namespace SomeDotes.Services.RealTimeService
         {
             RootObject ro = gs.ParsedData;
 
+            if (gs.ParsedData.Map == null)
+            {
+                return;
+            }
+            
             var steamIds = FindAllSteamIds(gs.ParsedData);
             MatchInfo matchInfo = new MatchInfo();
 
