@@ -14,16 +14,37 @@ namespace SomeDotes.ViewModels
 
     public class CurrentGameViewModel
     {
+        #region Declaration
+
         private readonly string PRIVATE_ACCOUNT = "4294967295";
 
         private CurrentGameStateService gs;
         private IDatabaseService dbService;
-        private MatchInfo currentMatchInfo;
+
+        #endregion //Declaration
+
+        #region Init
 
         public CurrentGameViewModel(CurrentGameStateService gs)
         {
             this.gs = gs;
             dbService = new DatabaseService();
+
+            LoadData(gs);
+        }
+
+        #endregion //Init
+
+        #region Properties
+
+        public MatchInfo CurrentMatchInfo { get; set; }
+
+        #endregion //Properties
+
+        #region Private Methods
+
+        private void LoadData(CurrentGameStateService gs)
+        {
 
             RootObject ro = gs.ParsedData;
 
@@ -70,19 +91,6 @@ namespace SomeDotes.ViewModels
             CurrentMatchInfo = matchInfo;
         }
 
-        public MatchInfo CurrentMatchInfo
-        {
-            get
-            {
-                return currentMatchInfo;
-            }
-            set
-            {
-                currentMatchInfo = value;
-            }
-        }
-
-
         private List<string> FindAllSteamIds(RootObject parsedData)
         {
             List<string> allSteamIds = new List<string>();
@@ -124,5 +132,7 @@ namespace SomeDotes.ViewModels
             return string.Format("data:image/png;base64,{0}",
                 Convert.ToBase64String(hero?.ImageFull));
         }
+
+        #endregion //Private methods
     }
 }
