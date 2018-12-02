@@ -124,49 +124,7 @@ namespace SomeDotes.Services.RealTimeService
 
             CurrentMatchInfo = matchInfo;
 
-            if (isNewGame)
-                UpdatePlayersData(steamIds);
-
             isNewGame = false;
-        }
-
-        private void UpdatePlayersData(List<string> steamIds)
-        {
-            foreach (var steamId in steamIds)
-            {
-                var currentPlayerAccountId = converter.SingleId(steamId);
-
-                Player currentPlayer = new Player();
-
-                using (SomeDotesDbContext db = new SomeDotesDbContext())
-                {
-                    var resultsForCurrentPlayer = db.Results.Where(r => r.Players.Any(p => p.AccountId.ToString() == currentPlayerAccountId)).Include(r => r.Players).ToList();
-
-                    foreach (var result in resultsForCurrentPlayer)
-                    {
-                        if (result.RadiantWin && (result.Players.FirstOrDefault(p => p.AccountId.ToString() == currentPlayerAccountId).PlayerSlot < 5))
-                            currentPlayer.Wins++;
-                        else
-                            currentPlayer.Losses++;
-                    }
-                }
-
-                if (currentPlayer.Losses == 0)
-                {
-                    if (currentPlayer.Wins != 0)
-                    {
-                        currentPlayer.WinRate = 100;
-                    }
-                    else
-                    {
-                        currentPlayer.WinRate = 0;
-                    }
-                }
-                else
-                {
-                    currentPlayer.WinRate = currentPlayer.Wins / currentPlayer.Losses * 100;
-                }
-            }
         }
 
         private List<string> FindAllSteamIds(RootObject parsedData)

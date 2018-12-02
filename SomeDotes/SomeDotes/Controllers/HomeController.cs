@@ -12,18 +12,18 @@ namespace SomeDotes.Controllers
     {
         IRegisterCurrentGameService rcgs = RegisterCurrentGameService.GetInstance();
 
-        public IActionResult Index()
+        public IActionResult CurrentGame()
         {
             rcgs.Run();
 
             return View();
         }
         
-        public IActionResult _RefreshHome()
+        public IActionResult _RefreshCurrentGame()
         {
             var matchInfo = rcgs.MatchInfo();
             
-            return PartialView("_RefreshHome", matchInfo);
+            return PartialView("_RefreshCurrentGame", matchInfo);
         }
 
         public IActionResult About()
