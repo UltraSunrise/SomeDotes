@@ -20,10 +20,8 @@ namespace SomeDotes.Controllers
         }
         
         public IActionResult _RefreshCurrentGame()
-        {
-            var matchInfo = rcgs.MatchInfo();
-            
-            return PartialView("_RefreshCurrentGame", matchInfo);
+        {            
+            return PartialView("_RefreshCurrentGame", rcgs.MatchInfo());
         }
 
         public IActionResult About()

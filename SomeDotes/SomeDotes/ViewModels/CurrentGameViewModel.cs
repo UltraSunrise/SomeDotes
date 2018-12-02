@@ -37,7 +37,7 @@ namespace SomeDotes.ViewModels
 
         #region Properties
 
-        public MatchInfo CurrentMatchInfo { get; set; }
+        public CurrentGameInfo CurrentMatchInfo { get; set; }
 
         #endregion //Properties
 
@@ -45,7 +45,6 @@ namespace SomeDotes.ViewModels
 
         private void LoadData(CurrentGameStateService gs)
         {
-
             RootObject ro = gs.ParsedData;
 
             if (gs.ParsedData.Map == null)
@@ -54,7 +53,7 @@ namespace SomeDotes.ViewModels
             }
 
             var steamIds = FindAllSteamIds(gs.ParsedData);
-            MatchInfo matchInfo = new MatchInfo();
+            CurrentGameInfo matchInfo = new CurrentGameInfo();
 
             matchInfo.MatchID = gs.ParsedData.Map.MatchId;
             matchInfo.RadiantGold = gs.ParsedData.MainPlayer.RadiantTeam.Player0.NetWorth;
@@ -108,7 +107,7 @@ namespace SomeDotes.ViewModels
             return currentHero;
         }
 
-        private void LoadImages(MatchInfo matchInfo, CurrentGameStateService gs)
+        private void LoadImages(CurrentGameInfo matchInfo, CurrentGameStateService gs)
         {
             ImagesHelper imagesHelper = ImagesHelper.GetInstance();
 

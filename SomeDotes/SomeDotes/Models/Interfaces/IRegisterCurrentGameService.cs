@@ -5,6 +5,6 @@
     interface IRegisterCurrentGameService
     {
         void Run();
-        MatchInfo MatchInfo();
+        CurrentGameInfo MatchInfo();
     }
 }

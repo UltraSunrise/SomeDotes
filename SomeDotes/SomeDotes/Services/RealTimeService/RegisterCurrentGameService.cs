@@ -14,7 +14,7 @@
 
         private ICurrentGameService cgs;
         private IConvertSteamIdToAccountId converter;
-        private MatchInfo currentMatchInfo;
+        private CurrentGameInfo currentMatchInfo;
         private static RegisterCurrentGameService singelton;
 
         #endregion
@@ -30,12 +30,12 @@
 
         #region Public Methods
 
-        public MatchInfo CurrentMatchInfo
+        public CurrentGameInfo CurrentMatchInfo
         {
             get
             {
                 if (currentMatchInfo == null)
-                    currentMatchInfo = new MatchInfo();
+                    currentMatchInfo = new CurrentGameInfo();
                 return currentMatchInfo;
             }
             set
@@ -60,7 +60,7 @@
             }
         }
 
-        public MatchInfo MatchInfo()
+        public CurrentGameInfo MatchInfo()
         {
             return CurrentMatchInfo;
         }

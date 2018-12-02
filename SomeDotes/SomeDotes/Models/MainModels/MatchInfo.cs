@@ -3,7 +3,7 @@
     using SomeDotes.Models.JSONModels.RealtimeGameModels;
     using System.Collections.Generic;
 
-    public class MatchInfo
+    public class CurrentGameInfo
     {
         public long MatchID { get; set; }
         public long RadiantGold { get; set; }
