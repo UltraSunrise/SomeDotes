@@ -2,8 +2,10 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using Microsoft.EntityFrameworkCore;
     using SomeDotes.Data;
     using SomeDotes.Data.Entities;
+    using SomeDotes.Helpers;
     using SomeDotes.Models.Intefaces;
 
     public class DatabaseService : IDatabaseService
@@ -50,6 +52,36 @@
                 return db
                         .Heroes
                         .ToList();
+            }
+        }
+
+        public List<HeroWinPercentageHelper> GetAllHeroesWinChange()
+        {
+            Dictionary<int, HeroWinPercentageHelper> allHeroesWinChange = new Dictionary<int, HeroWinPercentageHelper>();
+
+            using (SomeDotesDbContext db = new SomeDotesDbContext())
+            {
+                var tempList = db.Players.Select(p => new
+                {
+                    p.HeroId,
+                    p.PlayerSlot,
+                    p.Result.RadiantWin
+                });
+
+                foreach (var currentPlayer in tempList)
+                {
+                    var currentHeroId = currentPlayer.HeroId;
+
+                    if (!allHeroesWinChange.Keys.Contains(currentHeroId))
+                        allHeroesWinChange.Add(currentHeroId, new HeroWinPercentageHelper());
+
+                    if ((currentPlayer.PlayerSlot < 50 && currentPlayer.RadiantWin) || (currentPlayer.PlayerSlot > 50 && !currentPlayer.RadiantWin))
+                        allHeroesWinChange[currentHeroId].Wins++;
+                    else
+                        allHeroesWinChange[currentHeroId].Losses++;
+                }
+
+                return new List<HeroWinPercentageHelper>(allHeroesWinChange.Values);
             }
         }
     }

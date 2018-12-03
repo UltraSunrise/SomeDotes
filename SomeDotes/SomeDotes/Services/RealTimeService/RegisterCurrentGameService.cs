@@ -1,18 +1,26 @@
 ﻿namespace SomeDotes.Services.RealTimeService
 {
+    using HtmlAgilityPack;
     using Microsoft.Win32;
+    using SomeDotes.Helpers;
+    using SomeDotes.Models.Intefaces;
     using SomeDotes.Models.Interfaces;
     using SomeDotes.Models.MainModels;
+    using SomeDotes.Services.DatabaseServices;
     using SomeDotes.Services.Helpers;
     using SomeDotes.ViewModels;
+    using System;
     using System.Diagnostics;
     using System.IO;
+    using System.Net;
+    using System.Text.RegularExpressions;
 
     public class RegisterCurrentGameService : IRegisterCurrentGameService
     {
         #region Declaration
 
         private ICurrentGameService cgs;
+        private IDatabaseService dbService;
         private IConvertSteamIdToAccountId converter;
         private CurrentGameInfo currentMatchInfo;
         private static RegisterCurrentGameService singelton;
@@ -71,9 +79,17 @@
 
         private void OnNewGameState(CurrentGameStateService gs)
         {
+            PreGameView(gs);
+
             CurrentGameViewModel currentGameViewModel = new CurrentGameViewModel(gs);
 
             CurrentMatchInfo = currentGameViewModel.CurrentMatchInfo;
+        }
+
+        private void PreGameView(CurrentGameStateService gs)
+        {
+            dbService = new DatabaseService();
+            var temp = dbService.GetAllHeroesWinChange();
         }
 
         #region RegisterGame

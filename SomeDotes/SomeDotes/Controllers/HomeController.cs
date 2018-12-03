@@ -24,7 +24,7 @@ namespace SomeDotes.Controllers
             return PartialView("_RefreshCurrentGame", rcgs.MatchInfo());
         }
 
-        public IActionResult About()
+        public IActionResult PreGame()
         {
             return View();
         }
