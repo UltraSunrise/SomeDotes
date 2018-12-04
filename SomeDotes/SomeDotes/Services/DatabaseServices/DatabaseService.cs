@@ -55,7 +55,7 @@
             }
         }
 
-        public List<HeroWinPercentageHelper> GetAllHeroesWinChange()
+        public List<HeroWinPercentageHelper> GetAllHeroesWinChance()
         {
             Dictionary<int, HeroWinPercentageHelper> allHeroesWinChange = new Dictionary<int, HeroWinPercentageHelper>();
 
@@ -73,12 +73,20 @@
                     var currentHeroId = currentPlayer.HeroId;
 
                     if (!allHeroesWinChange.Keys.Contains(currentHeroId))
+                    {
                         allHeroesWinChange.Add(currentHeroId, new HeroWinPercentageHelper());
+                        allHeroesWinChange[currentHeroId].HeroId = currentHeroId;
+                    }
 
                     if ((currentPlayer.PlayerSlot < 50 && currentPlayer.RadiantWin) || (currentPlayer.PlayerSlot > 50 && !currentPlayer.RadiantWin))
                         allHeroesWinChange[currentHeroId].Wins++;
                     else
                         allHeroesWinChange[currentHeroId].Losses++;
+                }
+
+                foreach (var currentHero in allHeroesWinChange.Values)
+                {
+                    currentHero.WinChance = currentHero.Wins / (currentHero.Wins + currentHero.Losses);
                 }
 
                 return new List<HeroWinPercentageHelper>(allHeroesWinChange.Values);

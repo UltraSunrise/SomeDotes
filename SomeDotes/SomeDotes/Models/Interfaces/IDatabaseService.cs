@@ -10,6 +10,6 @@
         void AddRangeJSONToDatabase(List<Result> results);
         long GetLastAddedMatch();
         List<HeroDb> GetAllHeroes();
-        List<HeroWinPercentageHelper> GetAllHeroesWinChange();
+        List<HeroWinPercentageHelper> GetAllHeroesWinChance();
     }
 }
