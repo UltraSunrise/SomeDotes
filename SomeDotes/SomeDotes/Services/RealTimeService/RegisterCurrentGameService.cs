@@ -79,17 +79,9 @@
 
         private void OnNewGameState(CurrentGameStateService gs)
         {
-            PreGameView(gs);
-
             CurrentGameViewModel currentGameViewModel = new CurrentGameViewModel(gs);
 
             CurrentMatchInfo = currentGameViewModel.CurrentMatchInfo;
-        }
-
-        private void PreGameView(CurrentGameStateService gs)
-        {
-            dbService = new DatabaseService();
-            var temp = dbService.GetAllHeroesWinChange();
         }
 
         #region RegisterGame
