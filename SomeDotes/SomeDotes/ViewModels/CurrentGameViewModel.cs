@@ -1,6 +1,4 @@
-﻿using SomeDotes.Data.Entities;
-using SomeDotes.Models.MainModels;
-using SomeDotes.Services.Helpers;
+﻿using SomeDotes.Models.MainModels;
 using SomeDotes.Services.RealTimeService;
 using System;
 using System.Collections.Generic;
@@ -8,6 +6,7 @@ using System.Linq;
 
 namespace SomeDotes.ViewModels
 {
+    using SomeDotes.Converters;
     using SomeDotes.Models.Intefaces;
     using SomeDotes.Models.JSONModels.RealtimeGameModels;
     using SomeDotes.Services.DatabaseServices;
@@ -85,7 +84,7 @@ namespace SomeDotes.ViewModels
             matchInfo.HeroesBuybackCooldown.AddRange(gs.ParsedData.Hero.RadiantTeam.AllPlayers.Select(p => p.BuybackCooldown));
             matchInfo.HeroesBuybackCooldown.AddRange(gs.ParsedData.Hero.DireTeam.AllPlayers.Select(p => p.BuybackCooldown));
 
-            LoadImages(matchInfo, gs);
+            matchInfo.HeroesImages = ImagesConverter.LoadImages(gs.ParsedData.Hero.AllHeroes.Select(ah => ah.Id).ToList());
 
             CurrentMatchInfo = matchInfo;
         }
@@ -99,39 +98,6 @@ namespace SomeDotes.ViewModels
 
             return allSteamIds.Where(asi => asi != PRIVATE_ACCOUNT).ToList();
         }
-
-        private HeroDb GetHero(long id)
-        {
-            var currentHero = dbService.GetAllHeroes().FirstOrDefault(h => h.HeroId == id);
-
-            return currentHero;
-        }
-
-        private void LoadImages(CurrentGameInfo matchInfo, CurrentGameStateService gs)
-        {
-            ImagesHelper imagesHelper = ImagesHelper.GetInstance();
-
-            if (!imagesHelper.AreAllAdded)
-            {
-                for (int i = 0; i < 10; i++)
-                {
-                    if (imagesHelper.AllImages[i] == null)
-                    {
-                        imagesHelper.AllImages[i] = ConvertByteArrayToString(GetHero(gs.ParsedData.Hero.AllHeroes[i].Id));
-                    }
-                    if (imagesHelper.AllImages.Where(ai => ai != null).Count() == 10)
-                        imagesHelper.AreAllAdded = true;
-                }
-            }
-            matchInfo.HeroesImages = imagesHelper.AllImages;
-        }
-
-        private string ConvertByteArrayToString(HeroDb hero)
-        {
-            return string.Format("data:image/png;base64,{0}",
-                Convert.ToBase64String(hero?.ImageFull));
-        }
-
         #endregion //Private methods
     }
 }
