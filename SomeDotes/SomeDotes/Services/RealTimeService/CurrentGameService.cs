@@ -17,9 +17,9 @@
         private AutoResetEvent waitForConnection = new AutoResetEvent(false);
         private CurrentGameStateService currentGameState;
 
-        public CurrentGameService(int Port)
+        public CurrentGameService()
         {
-            port = Port;
+            port = 4000;
             portListener = new HttpListener();
             portListener.Prefixes.Add("http://localhost:" + Port + "/");
         }

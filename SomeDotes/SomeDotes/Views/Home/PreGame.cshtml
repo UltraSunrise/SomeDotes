@@ -7,15 +7,60 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js" type="text/javascript"></script>
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="Stylesheet" type="text/css" />
 </head>
-<body class="statisticsBody">
+<body>
+
+    @if (Model != null)
+    {
+        <table class="myTable" style="width:100%">
+            <tr>
+                <td colspan="4"></td>
+                <td class="winningHeroesTitle" colspan="10">
+                    Heroes with the highest winrate:
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+                @for (int i = 0; i < Model.MostWinningHeroes.Count; i++)
+                {
+                    <td>
+                        <div class="winRateImages">
+                            <img src="@Model.MostWinningHeroes[i].HeroImage" alt="Avatar" style="width: 90%">
+                            <div class="image-text-bottom-centered-winning">
+                                @Model.MostWinningHeroes[i].WinChance%
+                                <div class="image-text-background-color"></div>
+                            </div>
+                        </div>
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+                <td class="losingHeroesTitle" colspan="10">
+                    Heroes with the lowest winrate:
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4"></td>
+                @for (int i = 0; i < Model.MostLosingHeroes.Count; i++)
+                {
+                    <td>
+                        <div class="winRateImages">
+                            <img src="@Model.MostLosingHeroes[i].HeroImage" alt="Avatar" style="width: 90%">
+                            <div class="image-text-bottom-centered-losing">@Model.MostLosingHeroes[i].WinChance%</div>
+                        </div>
+                    </td>
+                }
+            </tr>
+        </table>
+    }
     <div id="stats">
-        @Html.Partial("_RefreshCurrentGame")
+        @Html.Partial("_RefreshPreGame")
     </div>
 
     <script>
         function loadPartialView() {
         $.ajax({
-            url: '@Url.Action("_RefreshCurrentGame", "Home")',
+            url: '@Url.Action("_RefreshPreGame", "Home")',
             type: 'POST',
             success: function (result) {
                 $("#stats").html(result);

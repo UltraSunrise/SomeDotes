@@ -1,4 +1,5 @@
 ﻿using SomeDotes.Data.Entities;
+using SomeDotes.Helpers;
 using SomeDotes.Models.Intefaces;
 using SomeDotes.Models.MainModels;
 using SomeDotes.Services.DatabaseServices;
@@ -21,17 +22,33 @@ namespace SomeDotes.Converters
 
             if (!imagesHelper.AreAllAdded)
             {
-                for (int i = 0; i < 10; i++)
+                for (int i = 0; i < ids.Count; i++)
                 {
                     if (imagesHelper.AllImages[i] == null)
                     {
                         imagesHelper.AllImages[i] = ConvertByteArrayToString(GetHero(ids[i]));
                     }
-                    if (imagesHelper.AllImages.Where(ai => ai != null).Count() == 10)
+                    if (imagesHelper.AllImages.Where(ai => ai == null).Count() == 0)
                         imagesHelper.AreAllAdded = true;
                 }
             }
             return imagesHelper.AllImages;
+        }
+
+        public static string[] LoadImages(List<HeroWinPercentageHelper> allHeroes)
+        {
+            dbService = new DatabaseService();
+            string[] images = new string[allHeroes.Count];
+            
+                for (int i = 0; i < allHeroes.Count; i++)
+                {
+                    if (images[i] == null)
+                    {
+                        images[i] = ConvertByteArrayToString(GetHero(allHeroes[i].HeroId));
+                    }
+                }
+
+            return images;
         }
 
         private static HeroDb GetHero(long id)

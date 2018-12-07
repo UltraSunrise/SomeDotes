@@ -2,7 +2,7 @@
 {
     using MainModels;
 
-    interface IRegisterCurrentGameService
+    public interface IRegisterCurrentGameService
     {
         void Run();
         CurrentGameInfo MatchInfo();

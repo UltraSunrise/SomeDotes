@@ -8,6 +8,7 @@ namespace SomeDotes.ViewModels
 {
     using SomeDotes.Converters;
     using SomeDotes.Models.Intefaces;
+    using SomeDotes.Models.Interfaces;
     using SomeDotes.Models.JSONModels.RealtimeGameModels;
     using SomeDotes.Services.DatabaseServices;
 
@@ -17,7 +18,7 @@ namespace SomeDotes.ViewModels
 
         private readonly string PRIVATE_ACCOUNT = "4294967295";
 
-        private CurrentGameStateService gs;
+        private ICurrentGameStateService gs;
         private IDatabaseService dbService;
 
         #endregion //Declaration

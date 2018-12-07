@@ -48,3 +48,70 @@ tr.KDAs td {
     color: cornsilk;
     font-size: 16px;
 }
+
+.winRateImages {
+    position: relative;
+    text-align: center;
+    font: bold;
+    font-size: 20px;
+    color: whitesmoke;
+}
+
+.image-text-bottom-centered-winning {
+    position: absolute;
+    bottom: -10px;
+    margin-left: 25px;
+    font: bold;
+    background: rgba(34, 139, 34, 0.45);
+    border-radius: 20%;
+}
+
+.image-text-bottom-centered-losing {
+    position: absolute;
+    bottom: -10px;
+    margin-left: 25px;
+    font: bold;
+    background: rgba(255, 0, 0, 0.45);
+    border-radius: 20%;
+}
+
+.winningHeroesTitle {
+    position: center;
+    text-align: center;
+    font: bold;
+    font-size: 24px;
+    color: rgb(34, 139, 34);
+}
+
+.losingHeroesTitle {
+    position: center;
+    text-align: center;
+    font: bold;
+    font-size: 24px;
+    color: red;
+    padding-top: 15px;
+}
+
+.image-text-background-color {
+    position: sticky;
+    align-self: center;
+    width: 100%;
+    opacity: 0.5;
+}
+
+div.image-text-bottom-centered-losing:hover {
+    position: absolute;
+    bottom: -10px;
+    align-self: center;
+    background: rgba(0, 0, 0, 0.45);
+    border-radius: 20%;
+}
+
+div.image-text-bottom-centered-winning:hover {
+    position: absolute;
+    bottom: -10px;
+    align-self: center;
+    font: bold;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 20%;
+}

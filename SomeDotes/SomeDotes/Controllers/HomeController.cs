@@ -10,7 +10,14 @@
     
     public class HomeController : Controller
     {
-        IRegisterCurrentGameService rcgs = RegisterCurrentGameService.GetInstance();
+        IRegisterCurrentGameService rcgs;
+        IPreGameStatisticsService pgss;
+
+        public HomeController(IRegisterCurrentGameService rcgs, IPreGameStatisticsService pgss)
+        {
+            this.rcgs = rcgs;
+            this.pgss = pgss;
+        }
 
         public IActionResult CurrentGame()
         {
@@ -26,7 +33,14 @@
 
         public IActionResult PreGame()
         {
-            return View();
+            pgss.Run();
+
+            return View(pgss.PreGameViewModel);
+        }
+
+        public IActionResult _RefreshPreGame()
+        {
+            return PartialView("_RefreshPreGame", pgss.PreGameViewModel);
         }
 
         public IActionResult Contact()

@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SomeDotes.Models.Interfaces;
+using SomeDotes.Services.RealTimeService;
 
 namespace SomeDotes
 {
@@ -20,6 +22,10 @@ namespace SomeDotes
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddSingleton<IRegisterCurrentGameService, RegisterCurrentGameService>();
+            services.AddSingleton<IPreGameStatisticsService, PreGameStatisticsService>();
+            services.AddSingleton<CurrentGameService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +49,8 @@ namespace SomeDotes
                     name: "default",
                     template: "{controller=Home}/{action=CurrentGame}/{id?}");
             });
+
+            
 
             Bootstrap();
         }

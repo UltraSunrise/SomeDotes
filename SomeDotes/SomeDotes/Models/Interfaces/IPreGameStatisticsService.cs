@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace SomeDotes.Models.Interfaces
+﻿namespace SomeDotes.Models.Interfaces
 {
-    interface IPreGameStatisticsService
+    using SomeDotes.ViewModels;
+
+    public interface IPreGameStatisticsService
     {
         void Run();
+        PreGameViewModel PreGameViewModel { get; set; }
     }
 }

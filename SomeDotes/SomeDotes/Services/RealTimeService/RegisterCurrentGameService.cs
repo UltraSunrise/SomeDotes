@@ -20,18 +20,17 @@
         #region Declaration
 
         private ICurrentGameService cgs;
-        private IDatabaseService dbService;
         private IConvertSteamIdToAccountId converter;
         private CurrentGameInfo currentMatchInfo;
-        private static RegisterCurrentGameService singelton;
 
         #endregion
 
         #region Initialize
 
-        private RegisterCurrentGameService()
+        public RegisterCurrentGameService(CurrentGameService cgs)
         {
             converter = new ConvertSteamIdToAccountId();
+            this.cgs = cgs;
         }
 
         #endregion
@@ -61,7 +60,6 @@
             Process[] programName = Process.GetProcessesByName("Dota2");
             if (programName.Length != 0)
             {
-                cgs = new CurrentGameService(4000);
                 cgs.NewGameState += OnNewGameState;
 
                 cgs.Start();
@@ -123,11 +121,6 @@
 
                 File.WriteAllLines(gsifile, contentofgsifile);
             }
-        }
-
-        public static RegisterCurrentGameService GetInstance()
-        {
-            return singelton ?? (singelton = new RegisterCurrentGameService());
         }
 
         #endregion

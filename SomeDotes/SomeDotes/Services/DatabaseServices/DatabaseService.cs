@@ -1,5 +1,6 @@
 ﻿namespace SomeDotes.Services.DatabaseServices
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Microsoft.EntityFrameworkCore;
@@ -84,11 +85,13 @@
                         allHeroesWinChange[currentHeroId].Losses++;
                 }
 
-                foreach (var currentHero in allHeroesWinChange.Values)
-                {
-                    currentHero.WinChance = currentHero.Wins / (currentHero.Wins + currentHero.Losses);
-                }
+                var keys = new List<int>(allHeroesWinChange.Keys);
 
+                foreach (var key in keys)
+                {
+                    allHeroesWinChange[key].WinChance = Math.Round((decimal)((decimal)allHeroesWinChange[key].Wins * 100 / (decimal)(allHeroesWinChange[key].Wins + allHeroesWinChange[key].Losses)), 2);
+                }
+                
                 return new List<HeroWinPercentageHelper>(allHeroesWinChange.Values);
             }
         }
