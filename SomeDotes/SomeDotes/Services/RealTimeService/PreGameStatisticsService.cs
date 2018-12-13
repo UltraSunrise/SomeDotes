@@ -11,11 +11,18 @@
     {
         private ICurrentGameService cgs;
         private IMemoryCache cache;
+        private bool check;
 
         public PreGameStatisticsService(IMemoryCache cache, CurrentGameService cgs)
         {
             this.cache = cache;
             this.cgs = cgs;
+            check = false;
+
+            Run();
+
+            // Unfortunate
+            while (!check) { }
         }
 
         public PreGameViewModel PreGameViewModel { get; set; }
@@ -36,6 +43,7 @@
         private void OnNewGameState(CurrentGameStateService gs)
         {
             PreGameViewModel = new PreGameViewModel(cache, gs);
+            check = true;
         }
 
         private void RegisterCGSFile()

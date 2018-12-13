@@ -33,8 +33,6 @@
 
         public IActionResult PreGame()
         {
-            pgss.Run();
-
             return View(pgss.PreGameViewModel);
         }
 
